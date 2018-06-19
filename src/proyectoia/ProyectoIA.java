@@ -343,14 +343,10 @@ public class ProyectoIA {
         return -1;
     }
 
-    public void intercambioPosiciones(float vecCaminos[][]) {
+    public void intercambioPosiciones() {
         float aux = vec50Mejores[0][4];
         vec50Mejores[0][4] = vec50Mejores[0][9];
         vec50Mejores[0][9] = aux;
-        
-        aux = vecCaminos[0][4];
-        vecCaminos[0][4] = vecCaminos[0][9];
-        vecCaminos[0][9] = aux;
     }
 
     public void imprimeUsados(ArrayList<PosValor> lista) {
@@ -368,29 +364,30 @@ public class ProyectoIA {
         return false;
     }
     
-    public void muestraPrimerCamino() {
+    public void muestraPrimerCamino(float vecCaminos[][]) {
         for (int j = 0; j < 27; j++) {                        
             if (j == 26) {                
                 System.out.print("\t[" + vec50Mejores[0][j] + "] ");
             } else {
-                if (j == 25) {
-                    if (vec50Mejores[0][j] < 10) {
-                        System.out.print(" " + (int) vec50Mejores[0][j] + "]\t->");
-                    } else {
-                        System.out.print((int) vec50Mejores[0][j] + "]\t->");
-                    }
-                } else if(j == 0){
-                    if (vec50Mejores[0][j] < 10) {
-                        System.out.print("[" + (int) vec50Mejores[0][j] + " , ");
-                    } else {
-                        System.out.print((int) vec50Mejores[0][j] + " , ");
-                    }
-                }else {
-                    if (vec50Mejores[0][j] < 10) {
-                        System.out.print(" " + (int) vec50Mejores[0][j] + " , ");
-                    } else {
-                        System.out.print((int) vec50Mejores[0][j] + " , ");
-                    }
+                switch (j) {
+                    case 25:
+                        if (vec50Mejores[0][j] < 10) {
+                            System.out.print(" " + (int) vec50Mejores[0][j] + "]\t->");
+                        } else {
+                            System.out.print((int) vec50Mejores[0][j] + "]\t->");
+                        }   break;
+                    case 0:
+                        if (vec50Mejores[0][j] < 10) {
+                            System.out.print("[" + (int) vec50Mejores[0][j] + " , ");
+                        } else {
+                            System.out.print((int) vec50Mejores[0][j] + " , ");
+                        }   break;
+                    default:
+                        if (vec50Mejores[0][j] < 10) {
+                            System.out.print(" " + (int) vec50Mejores[0][j] + " , ");
+                        } else {
+                            System.out.print((int) vec50Mejores[0][j] + " , ");
+                        }   break;
                 }
             }
         }
@@ -417,17 +414,17 @@ public class ProyectoIA {
         a.muestraPrimeros50(a.vecCaminos);
         System.out.println("");
         System.out.println("\n Permutacion---------------------------------------------------------------------------------------------------------------------------");
-        a.intercambioPosiciones(a.vecCaminos);
+        a.intercambioPosiciones();
         a.muestraPrimeros50(a.vecCaminos);
         System.out.println("\nULTIMA Entrega---------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Generacion Cromosoma\t\t\t\t\t\t\t\t\tContenido\t\t\t\t\t\t\t\t\tRecorrido");
         for (int i = 0; i < 100; i++) {
-            a.intercambioPosiciones(a.vecCaminos);
+            a.intercambioPosiciones();
             a.agregaCaminos_2();
             a.vecCaminos = a.distanciaCaminos(a.vecCaminos);
             a.muestraPrimeros50SinImprimir(a.vecCaminos);
             System.out.print("    "+i+"\t       "+(i+1)+"\t");
-            a.muestraPrimerCamino();
+            a.muestraPrimerCamino(a.vecCaminos);
             System.out.println("");
         }
     }
