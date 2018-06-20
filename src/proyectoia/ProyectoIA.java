@@ -21,7 +21,7 @@ public class ProyectoIA {
 
     }
 
-    private void agregaCuidades() { //Se agregan las coordendas X y Y de las ciudades
+    public void agregaCuidades() { //Se agregan las coordendas X y Y de las ciudades
         //Cuidad 1
         vecCiudades[0][0] = 5; //posicion X
         vecCiudades[0][1] = 4; //posicion Y
@@ -99,7 +99,7 @@ public class ProyectoIA {
         vecCiudades[24][1] = 8; //posicion Y
     }
 
-    private void agregaCaminos() { //Hace las distintas combinaciones de ciudades
+    public void agregaCaminos() { //Hace las distintas combinaciones de ciudades
         /*Random rand = new Random();*/
         for (int i = 0; i < 100; i++) {
             vecCaminos[i][0] = 1;
@@ -120,7 +120,7 @@ public class ProyectoIA {
         }
     }
 
-    private boolean verifica(int rand, int i, int j) { //Verifica que la ciudad no se repita
+    public boolean verifica(int rand, int i, int j) { //Verifica que la ciudad no se repita
         for (int x = 0; x < j; x++) {
             if (rand == vecCaminos[i][x]) {
                 return false; //Si la ciudad se repite manda un false 
@@ -148,7 +148,7 @@ public class ProyectoIA {
         }
     }
 
-    private float[][] distanciaCaminos(float vecCaminos[][]) { //Saca la distancia total del recorrido
+    public float[][] distanciaCaminos(float vecCaminos[][]) { //Saca la distancia total del recorrido
         float suma = 0;
         for (int i = 0; i < 100; i++) {
             suma = 0;
@@ -160,7 +160,7 @@ public class ProyectoIA {
         return vecCaminos;
     }
 
-    private float dEntreCiudades(float c1, float c2) { //Saca la distancia entre ciudades
+    public float dEntreCiudades(float c1, float c2) { //Saca la distancia entre ciudades
         int xp1 = (int) (c1 - 1); //Ciudad X1/Y2 - Se le resto 1 para que concordara con la matriz
         int xp2 = (int) (c2 - 1); //Ciudad X2/Y2 - Se le resto 1 para que concordara con la matriz
         float restX = (float) Math.pow((vecCiudades[xp2][0] - vecCiudades[xp1][0]), 2);//(X1-X2)^2
@@ -169,7 +169,7 @@ public class ProyectoIA {
         return raiz;
     }
 
-    private void ordenaMenorMayor(float vecCaminos[][]) { //Ordena todos los caminos del menor al mayor
+    public void ordenaMenorMayor(float vecCaminos[][]) { //Ordena todos los caminos del menor al mayor
         int p;
         float aux;
         for (int i = 0; i < 100; i++) {
@@ -185,7 +185,7 @@ public class ProyectoIA {
         }
     }
 
-    private void cambiaCaminos(int ap, int dp, float vecCaminos[][]) { //Cambia los vectores dentro de la matriz
+    public void cambiaCaminos(int ap, int dp, float vecCaminos[][]) { //Cambia los vectores dentro de la matriz
         float aux = 0;
         for (int i = 0; i < 27; i++) {
             aux = vecCaminos[ap][i];
@@ -396,36 +396,5 @@ public class ProyectoIA {
 
     /**
      * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        ProyectoIA a = new ProyectoIA();
-        a.agregaCuidades(); //Carga las coordenadas de las ciudades
-        System.out.println("1era Entrega---------------------------------------------------------------------------------------------------------------------------");
-        a.agregaCaminos(); //Hace las distintas combinaciones de ciudades   
-        a.vecCaminos = a.distanciaCaminos(a.vecCaminos); //Saca la distancia total del recorrido
-        a.muestraPrimeros50(a.vecCaminos); //Muestra los primeros 50 caminos y ordena todos los caminos del m al M
-        System.out.println("\n2da Entrega---------------------------------------------------------------------------------------------------------------------------");
-        a.agregaCaminos_2();
-        a.vecCaminos = a.distanciaCaminos(a.vecCaminos);
-        System.out.println("\nSin Ordenar---------------------------------------------------------------------------------------------------------------------------");
-        a.muestraPrimeros50SinOrdenar(a.vecCaminos);
-        System.out.println("\nOrdenados---------------------------------------------------------------------------------------------------------------------------");
-        a.muestraPrimeros50(a.vecCaminos);
-        System.out.println("");
-        System.out.println("\n Permutacion---------------------------------------------------------------------------------------------------------------------------");
-        a.intercambioPosiciones();
-        a.muestraPrimeros50(a.vecCaminos);
-        System.out.println("\nULTIMA Entrega---------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Generacion Cromosoma\t\t\t\t\t\t\t\t\tContenido\t\t\t\t\t\t\t\t\tRecorrido");
-        for (int i = 0; i < 100; i++) {
-            a.intercambioPosiciones();
-            a.agregaCaminos_2();
-            a.vecCaminos = a.distanciaCaminos(a.vecCaminos);
-            a.muestraPrimeros50SinImprimir(a.vecCaminos);
-            System.out.print("    "+i+"\t       "+(i+1)+"\t");
-            a.muestraPrimerCamino(a.vecCaminos);
-            System.out.println("");
-        }
-    }
+     */    
 }
